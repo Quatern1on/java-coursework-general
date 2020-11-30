@@ -13,21 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.List;
+import java.util.*;
 
 @Controller
-public class HibernateController {
+public class JdbcController {
 
-    private static final String INSTRUMENT = "hibernate";
-    private static final String TITLE = "Hibernate";
+    private static final String INSTRUMENT = "jdbc";
+    private static final String TITLE = "JDBC";
 
     @Autowired
-    @Qualifier("carBrandHibernateService")
+    @Qualifier("carBrandJdbcService")
     private CarBrandService carBrandService;
     @Autowired
-    @Qualifier("carModelHibernateService")
+    @Qualifier("carModelJdbcService")
     private CarModelService carModelService;
-
 
     @RequestMapping(value = "/"+INSTRUMENT+"", method = RequestMethod.GET)
     public String printJdbc(ModelMap model) {
@@ -74,7 +73,6 @@ public class HibernateController {
 
         CarBrand carBrand = carBrandService.get(idBrand);
         model.addAttribute("carBrand", carBrand);
-        model.addAttribute("edit", true);
         return "brandForm";
     }
 
@@ -102,8 +100,6 @@ public class HibernateController {
     @RequestMapping(value = { "/"+INSTRUMENT+"/newModel" }, method = RequestMethod.POST)
     public String saveModel(CarModel carModel) {
 
-        int idBrand = carModel.getIdBrand();
-        carModel.setCarBrand(carBrandService.get(idBrand));
         carModelService.saveOrUpdate(carModel);
         return "redirect:/"+INSTRUMENT;
     }
@@ -130,10 +126,6 @@ public class HibernateController {
 
     @RequestMapping(value = {  "/"+INSTRUMENT+"/edit-model/{idModel}" }, method = RequestMethod.POST)
     public String updateModel(CarModel carModel) {
-
-        int idBrand = carModel.getIdBrand();
-        carModel.setCarBrand(carBrandService.get(idBrand));
-
         carModelService.saveOrUpdate(carModel);
         return "redirect:/"+INSTRUMENT;
     }
