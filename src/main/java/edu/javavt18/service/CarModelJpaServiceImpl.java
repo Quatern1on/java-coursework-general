@@ -18,6 +18,9 @@ import java.util.List;
 @Transactional(readOnly = false, value = "jpaTransactionManager")
 public class CarModelJpaServiceImpl implements CarModelService {
 
+    /**
+     * An instance of {@link edu.javavt18.dao.jpa.CarModelDAOJpaImpl}.
+     */
     @Autowired
     @Qualifier("getCarModelJpaDAO")
     private CarModelDAO carModelDAO;

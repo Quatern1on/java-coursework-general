@@ -16,6 +16,9 @@ import java.util.List;
 @Service("carModelJdbcService")
 public class CarModelJdbcServiceImpl implements CarModelService {
 
+    /**
+     * An instance of {@link edu.javavt18.dao.jdbc.CarModelDAOJdbcImpl}.
+     */
     @Autowired
     @Qualifier("getCarModelJdbcDAO")
     private CarModelDAO carModelDAO;

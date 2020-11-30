@@ -18,6 +18,9 @@ import java.util.List;
 @Transactional(readOnly = false, value = "hibernateTransactionManager")
 public class CarBrandHibernateServiceImpl implements CarBrandService {
 
+    /**
+     * An instance of {@link edu.javavt18.dao.hibernate.CarBrandDAOHibernateImpl}.
+     */
     @Autowired
     @Qualifier("getCarBrandHibernateDAO")
     private CarBrandDAO carBrandDAO;
